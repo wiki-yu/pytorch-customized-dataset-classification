@@ -1,7 +1,5 @@
 import os
-import cv2
 import time
-import random
 import numpy as np
 
 import torch
@@ -13,7 +11,6 @@ from torch.optim import optimizer
 from torch.utils.data import Dataset, DataLoader
 
 import torchvision.transforms as T
-from torchvision.utils import make_grid
 from torchvision.models import vgg16
 
 from sklearn.model_selection import train_test_split
@@ -45,8 +42,8 @@ def main():
     dogs_list = [img for img in imgs if img.split(".")[0] == "dog"]
     cats_list = [img for img in imgs if img.split(".")[0] == "cat"]
 
-    print("No of Dogs Images: ",len(dogs_list))
-    print("No of Cats Images: ",len(cats_list))
+    print("No of Dogs Images: ", len(dogs_list))
+    print("No of Cats Images: ", len(cats_list))
 
     class_to_int = {"dog" : 0, "cat" : 1}
     int_to_class = {0 : "dog", 1 : "cat"}
@@ -115,7 +112,7 @@ def main():
     model.to(device)
 
     # No of epochs 
-    epochs = 15
+    epochs = 3
 
     ### Training and Validation xD
     best_val_acc = 0
@@ -146,16 +143,16 @@ def main():
 
     #Loss
     plt.title("Loss")
-    plt.plot(np.arange(1, 16, 1), train_logs["loss"], color = 'blue')
-    plt.plot(np.arange(1, 16, 1), val_logs["loss"], color = 'yellow')
+    plt.plot(np.arange(1, epochs+1, 1), train_logs["loss"], color = 'blue')
+    plt.plot(np.arange(1, epochs+1, 1), val_logs["loss"], color = 'yellow')
     plt.xlabel("Epochs")
     plt.ylabel("Loss")
     plt.show()
 
     #Accuracy
     plt.title("Accuracy")
-    plt.plot(np.arange(1, 16, 1), train_logs["accuracy"], color = 'blue')
-    plt.plot(np.arange(1, 16, 1), val_logs["accuracy"], color = 'yellow')
+    plt.plot(np.arange(1, epochs+1, 1), train_logs["accuracy"], color = 'blue')
+    plt.plot(np.arange(1, epochs+1, 1), val_logs["accuracy"], color = 'yellow')
     plt.xlabel("Epochs")
     plt.ylabel("Accuracy")
     plt.show()
