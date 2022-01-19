@@ -6,7 +6,6 @@ import torch
 from torch._C import device
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.optim import optimizer
 
 from torch.utils.data import Dataset, DataLoader
 
